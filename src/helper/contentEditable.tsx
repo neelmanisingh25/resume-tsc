@@ -1,5 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { showPlaceholderClasses } from '@/constants/constants.ts'
+import MonthYearPicker from '@/components/util/MonthYearPicker.tsx'
+import { EditModeContext } from '@/contexts/context.ts'
 
 interface Props {
   children: React.ReactNode
@@ -8,7 +10,7 @@ interface Props {
   placeholder: string
   onChange: (value: string) => void
   defaultValue?: string
-  isActive: boolean
+  isActive?: boolean
   onfocus?: () => void
   onblur?: () => void
   onEnterKey?: () => void
@@ -16,6 +18,10 @@ interface Props {
   deleteAchievement?: boolean
   onDeleteField?: () => void
   addNewSkill?: boolean
+  dataField?: string
+  isDatePicker?: boolean
+  endDate?: boolean
+  useHtml?: boolean
 }
 
 function ContentEditable({
@@ -25,16 +31,22 @@ function ContentEditable({
   placeholder,
   onChange,
   defaultValue,
-  isActive,
+  // isActive,
   onfocus,
   onblur,
   onEnterKey,
   addNewAchievement,
   deleteAchievement,
   onDeleteField,
-  addNewSkill
+  addNewSkill,
+  dataField,
+  isDatePicker = false,
+  endDate = false,
+  useHtml = false
 }: Props) {
   const contentEditableDivRef = useRef<HTMLDivElement>(null)
+  const [showDatePicker, setShowDatePicker] = useState(false)
+  const { isEditMode } = useContext(EditModeContext)
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== 'Enter' && e.key !== 'Backspace') return
@@ -45,7 +57,7 @@ function ContentEditable({
       e.preventDefault()
       const currentText = contentEditableDivRef.current?.textContent
       if (currentText !== '') {
-        onChange?.(currentText)
+        onChange?.(currentText || '')
         onEnterKey?.()
       }
     }
@@ -55,12 +67,20 @@ function ContentEditable({
     }
   }
 
+  const getContent = () => {
+    if (!contentEditableDivRef.current) return ''
+    return useHtml
+      ? contentEditableDivRef.current.innerHTML
+      : contentEditableDivRef.current.textContent || ''
+  }
+
   const handleInput = (isTriggeredByOnInput: boolean) => {
     if (!contentEditableDivRef.current) return
-    const value = contentEditableDivRef.current.textContent || ''
+    const value = getContent()
+    // const value = contentEditableDivRef.current.textContent || ''
     if (value === '') contentEditableDivRef.current.textContent = ''
     if (value !== '' && isTriggeredByOnInput) return
-    if (value === '' && defaultValue && !isTriggeredByOnInput) {
+    if (value === '' && defaultValue && !isTriggeredByOnInput && isEditMode) {
       onChange?.(defaultValue)
       return
     }
@@ -80,34 +100,64 @@ function ContentEditable({
     //   contentEditableDivRef.current?.blur()
     //   return
     // }
+
+    // TODO: mark the element even when focused through tab key
+
+    if (isDatePicker) {
+      event.preventDefault()
+      setShowDatePicker(true)
+      return
+    }
+
     event.stopPropagation()
     if (contentEditableDivRef.current && defaultValue) {
       const value = contentEditableDivRef.current.textContent
-      if (value === defaultValue) {
+      if (value === defaultValue && isEditMode) {
         onChange?.('')
       }
     }
     onfocus?.()
   }
 
+  const handleDateSelect = (value: string) => {
+    onChange(value)
+    setShowDatePicker(false)
+  }
+
   return (
-    <div
-      ref={contentEditableDivRef}
-      contentEditable
-      suppressContentEditableWarning
-      tabIndex={0}
-      onKeyDown={handleKeyPress}
-      className={`
+    <>
+      <div
+        ref={contentEditableDivRef}
+        contentEditable={!isDatePicker && isEditMode}
+        suppressContentEditableWarning
+        tabIndex={0}
+        onKeyDown={handleKeyPress}
+        className={`
         ${className || ''}
-        ${placeholder && isActive ? `${showPlaceholderClasses}` : ''}
+        ${placeholder ? `${showPlaceholderClasses}` : ''}
+        ${isDatePicker ? 'cursor-pointer' : ''}
       `}
-      data-placeholder={placeholder}
-      onInput={() => handleInput(true)}
-      onBlur={handleBlur}
-      onFocus={handleFocus}
-    >
-      {children}
-    </div>
+        data-placeholder={placeholder}
+        onInput={() => handleInput(true)}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        data-name={dataField}
+      >
+        {/*{useHtml ? (*/}
+        {/*  <div dangerouslySetInnerHTML={{ __html: children as string }} />*/}
+        {/*) : (*/}
+        {/*  children*/}
+        {/*)}*/}
+        {children}
+      </div>
+      {isDatePicker && showDatePicker && isEditMode && (
+        <MonthYearPicker
+          onChange={handleDateSelect}
+          onClose={() => setShowDatePicker(false)}
+          endDate={endDate}
+        />
+      )}
+    </>
   )
 }
 

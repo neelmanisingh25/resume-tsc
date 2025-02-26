@@ -13,6 +13,9 @@ const useClickOutside = (
       const activeElement = skillDataRef.current?.[activeSkillGroup]
       if (activeElement && !activeElement.contains(event.target as Node)) {
         setActiveSkillGroup(null)
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur()
+        }
       }
     },
     [activeSkillGroup, setActiveSkillGroup, skillDataRef]

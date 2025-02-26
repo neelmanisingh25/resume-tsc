@@ -96,16 +96,16 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                   className='outline-none'
                 />
               </div>
-              <div className='space-y-1'>
-                <Label htmlFor='portfolio'>Portfolio Website</Label>
-                <Input
-                  type='text'
-                  name='portfolio'
-                  placeholder='Enter Portfolio URL'
-                  defaultValue={state?.portfolio}
-                  className='outline-none'
-                />
-              </div>
+              {/*<div className='space-y-1'>*/}
+              {/*  <Label htmlFor='portfolio'>Portfolio Website</Label>*/}
+              {/*  <Input*/}
+              {/*    type='text'*/}
+              {/*    name='portfolio'*/}
+              {/*    placeholder='Enter Portfolio URL'*/}
+              {/*    defaultValue={state?.portfolio}*/}
+              {/*    className='outline-none'*/}
+              {/*  />*/}
+              {/*</div>*/}
             </div>
             <DialogFooter>
               <DialogClose>

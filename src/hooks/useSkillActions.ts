@@ -1,6 +1,7 @@
 import { useResumeStore } from '@/store/rootStore.ts'
 import { SkillValueRef } from '@/components/skills/SkillsData.tsx'
 import React from 'react'
+import { Skill } from '@/store/SkillsSlice.ts'
 
 const useSkillActions = () => {
   const checkForEmptySkill = (id: string) => {
@@ -12,8 +13,11 @@ const useSkillActions = () => {
   const updateSkillGroupName = useResumeStore(
     (state) => state.updateSkillGroupName
   )
-  const addNewSkill = useResumeStore((state) => state.addNewSkill)
+  const addNewSkillValue = useResumeStore((state) => state.addNewSkillValue)
   const updateSkillValue = useResumeStore((state) => state.updateSkillValue)
+  const addNewSkill = useResumeStore((state) => state.addNewSkill)
+  const deleteSkill = useResumeStore((state) => state.deleteSkill)
+  const reorderSkills = useResumeStore((state) => state.reorderSkills)
 
   const focusSkillElement = (
     id: string,
@@ -37,7 +41,7 @@ const useSkillActions = () => {
   return {
     handleSkillGroupChange: (id: string) => (value: string) =>
       updateSkillGroupName(id, value),
-    handleAddNewSkill:
+    handleAddNewSkillValue:
       (
         id: string,
         index: number,
@@ -48,7 +52,7 @@ const useSkillActions = () => {
         const emptySkill = checkForEmptySkill(id)
         console.log('emptySkill', emptySkill)
         if (!emptySkill) {
-          addNewSkill(id, index)
+          addNewSkillValue(id, index)
           focusSkillElement(id, skillValueRef)
         } else {
           // TODO: this needs work, it's nor working
@@ -56,7 +60,10 @@ const useSkillActions = () => {
         }
       },
     handleUpdateSkill: (id: string, index: number) => (value: string) =>
-      updateSkillValue(id, index, value)
+      updateSkillValue(id, index, value),
+    handleAddNewSkill: () => addNewSkill(),
+    handleDeleteSkill: (id: string) => () => deleteSkill(id),
+    handleReorderSkills: (skills: Skill[]) => reorderSkills(skills)
   }
 }
 

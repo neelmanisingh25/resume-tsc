@@ -1,6 +1,5 @@
 import { StateCreator } from 'zustand/vanilla'
-import { WorkExperienceSlice } from '@/store/WorkExperienceSlice.ts'
-import { SkillsSlice } from '@/store/SkillsSlice.ts'
+import { StoreState } from '@/store/rootStore.ts'
 export interface Contact {
   mobile?: string
   email?: string
@@ -18,12 +17,12 @@ export interface HeaderSlice {
 }
 
 export const createHeaderSlice: StateCreator<
-  HeaderSlice & WorkExperienceSlice & SkillsSlice,
+  StoreState,
   [['zustand/immer', never], ['zustand/devtools', never]],
   [],
   HeaderSlice
 > = (set) => ({
-  name: 'Neelmani Singh',
+  name: '',
   contact: {
     mobile: '+91-9511110626',
     email: 'hello@neelmani.in',

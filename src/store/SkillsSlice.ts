@@ -1,7 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { StateCreator } from 'zustand'
-import { WorkExperienceSlice } from './WorkExperienceSlice'
-import { HeaderSlice } from './HeaderSlice'
+import { StoreState } from '@/store/rootStore.ts'
 
 export interface Skill {
   id: string
@@ -22,8 +21,17 @@ interface SkillsState {
 export interface SkillsSlice extends SkillsState {
   updateSkillTitle: (title: string) => void
   updateSkillGroupName: (id: string, value: string) => void
-  addNewSkill: (id: string, index: number) => void
+  addNewSkillValue: (id: string, index: number) => void
+  addNewSkill: () => void
+  deleteSkill: (id: string) => void
   updateSkillValue: (id: string, index: number, value: string) => void
+  reorderSkills: (skills: Skill[]) => void
+}
+
+const emptyState = {
+  id: uuid(),
+  name: '',
+  value: [{ id: uuid(), data: '' }]
 }
 
 const initialState: SkillsState = {
@@ -46,8 +54,8 @@ const initialState: SkillsState = {
       },
       {
         id: uuid(),
-        name: 'New Acquired Skills',
-        value: []
+        name: '',
+        value: [{ id: uuid(), data: '' }]
       }
     ]
   }
@@ -73,7 +81,7 @@ const updateSkillState = (
 }
 
 export const createSkillsSlice: StateCreator<
-  SkillsSlice & WorkExperienceSlice & HeaderSlice,
+  StoreState,
   [['zustand/immer', never], ['zustand/devtools', never]],
   [],
   SkillsSlice
@@ -97,12 +105,20 @@ export const createSkillsSlice: StateCreator<
       undefined,
       'resume:Skills/updateSkillGroupName'
     ),
-  addNewSkill: (id: string, index: number) =>
+  addNewSkillValue: (id: string, index: number) =>
     set(
       (state) => {
         updateSkillState(state, id, (skill) => {
           skill.value.splice(index, 0, { id: uuid(), data: '' })
         })
+      },
+      undefined,
+      'resume:Skills/addNewSkillValue'
+    ),
+  addNewSkill: () =>
+    set(
+      (state) => {
+        state.skills.data.push(emptyState)
       },
       undefined,
       'resume:Skills/addNewSkill'
@@ -116,5 +132,21 @@ export const createSkillsSlice: StateCreator<
       },
       undefined,
       'resume:Skills/updateSkillValue'
+    ),
+  deleteSkill: (id: string) =>
+    set(
+      (state) => {
+        state.skills.data.splice(findSkillIndex(state.skills.data, id), 1)
+      },
+      undefined,
+      'resume:Skills/deleteSkill'
+    ),
+  reorderSkills: (skills: Skill[]) =>
+    set(
+      (state) => {
+        state.skills.data = skills
+      },
+      undefined,
+      'resume:Skills/reorderSkills'
     )
 })
