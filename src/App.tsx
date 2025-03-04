@@ -14,6 +14,7 @@ import {
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import SortableSectionTitle from '@/components/section/SortableSectionTitle.tsx'
 import Skills from '@/components/skills/Skills.tsx'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 function App() {
   const [isDraggingSection, setIsDraggingSection] = useState(false)
 
@@ -62,54 +63,59 @@ function App() {
   }
 
   return (
-    <EditModeProvider>
-      <PreviewModeProvider>
-        <CreateMyResume />
-        <PageContainer>
-          <div className='text-[10pt] leading-normal'>
-            <Contact />
-            <Separator className='my-1.5' />
-            <DndContext
-              onDragEnd={handleDragEnd}
-              modifiers={[restrictToVerticalAxis]}
-            >
-              <SortableContext
-                items={resumeData.map((item) => item.sectionKey)}
-                strategy={verticalListSortingStrategy}
+    <>
+      <EditModeProvider>
+        <PreviewModeProvider>
+          <CreateMyResume />
+          <PageContainer>
+            <div className='text-[10pt] leading-normal'>
+              <Contact />
+              <Separator className='my-1.5' />
+              <DndContext
+                onDragEnd={handleDragEnd}
+                modifiers={[restrictToVerticalAxis]}
               >
-                {resumeData.map(({ sectionKey, config }) => (
-                  <div key={sectionKey}>
-                    <SortableSectionTitle
-                      sectionKey={sectionKey}
-                      config={config}
-                      onDraggingChange={handleChangeIsDraggingSection}
-                      onDelete={deleteSelection}
-                    />
-                    <div className={isDraggingSection ? 'hidden' : ''}>
-                      {sectionKey === 'skills' ? (
-                        <Skills />
-                      ) : (
-                        <Section
-                          key={sectionKey}
-                          sectionKey={sectionKey}
-                          config={config}
-                        />
-                      )}
+                <SortableContext
+                  items={resumeData.map((item) => item.sectionKey)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {resumeData.map(({ sectionKey, config }) => (
+                    <div key={sectionKey}>
+                      <SortableSectionTitle
+                        sectionKey={sectionKey}
+                        config={config}
+                        onDraggingChange={handleChangeIsDraggingSection}
+                        onDelete={deleteSelection}
+                      />
+                      <div className={isDraggingSection ? 'hidden' : ''}>
+                        {sectionKey === 'skills' ? (
+                          <Skills />
+                        ) : (
+                          <Section
+                            key={sectionKey}
+                            sectionKey={sectionKey}
+                            config={config}
+                          />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </SortableContext>
-            </DndContext>
-          </div>
-        </PageContainer>
-      </PreviewModeProvider>
-    </EditModeProvider>
+                  ))}
+                </SortableContext>
+              </DndContext>
+            </div>
+          </PageContainer>
+        </PreviewModeProvider>
+      </EditModeProvider>
+      <Analytics />
+      <SpeedInsights />
+    </>
   )
 }
 
 import PreviewModeProvider from '@/providers/PreviewModeProvider.tsx'
 import CreateMyResume from '@/components/editUtil/buttons/CreateMyResume.tsx'
 import EditModeProvider from '@/providers/EditModeProvider.tsx'
+import { Analytics } from '@vercel/analytics/react'
 
 const availableResumeFields = [
   {

@@ -298,7 +298,7 @@ function SectionItem({
               field && (
                 <div
                   key={`${field.name}-${item.id}`}
-                  className={`${flexGrowFields.includes(field.name) ? 'font-semibold' : ''}`}
+                  className={`${flexGrowFields.includes(field?.name) ? 'font-semibold' : ''}`}
                 >
                   <ContentEditable
                     className={`${contentEditableClasses}`}
