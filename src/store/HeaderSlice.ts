@@ -14,6 +14,7 @@ export interface HeaderSlice {
   contact: Contact
   addContactInfo: (key: keyof Contact, value: string) => void
   updateAllContactInfo: (contact: Contact) => void
+  updateName: (name: string) => void
 }
 
 export const createHeaderSlice: StateCreator<
@@ -22,7 +23,7 @@ export const createHeaderSlice: StateCreator<
   [],
   HeaderSlice
 > = (set) => ({
-  name: '',
+  name: 'Neelmani Singh',
   contact: {
     mobile: '+91-9511110626',
     email: 'hello@neelmani.in',
@@ -46,5 +47,13 @@ export const createHeaderSlice: StateCreator<
       },
       undefined,
       'resume:Contact/updateAllContactInfo'
+    ),
+  updateName: (name: string) =>
+    set(
+      (state) => {
+        state.name = name
+      },
+      undefined,
+      'resume:Contact/updateName'
     )
 })

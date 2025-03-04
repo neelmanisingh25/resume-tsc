@@ -1,5 +1,7 @@
 import ContentEditable from '@/helper/contentEditable.tsx'
 import { contentEditableClasses } from '@/constants/constants.ts'
+import { PreviewModeContext } from '@/contexts/context.ts'
+import { useContext } from 'react'
 
 interface SelectDateProps {
   position?: any
@@ -25,6 +27,7 @@ function SelectStartEndDate(props: SelectDateProps) {
   } = props
   // const getPlaceHolder = (dateType: string, fields = positionFields): string =>
   //   fields.arrayFields?.find((f) => f.name === dateType)?.placeholder || ''
+  const { isPreviewMode } = useContext(PreviewModeContext)
 
   const startFinishDate = (
     <>
@@ -37,10 +40,15 @@ function SelectStartEndDate(props: SelectDateProps) {
         onChange={(value) => onChange(value, 'beginMonthYear')}
         isActive={isActive}
         isDatePicker
+        value={position ? position.beginMonthYear : startDate}
       >
         {position ? position.beginMonthYear : startDate}
       </ContentEditable>
-      <div className='mx-1'>-</div>
+      <div
+        className={`mx-1 ${isPreviewMode && (!(position?.beginMonthYear || startDate) || !(position?.endMonthYear || endDate)) ? 'hidden' : ''}`}
+      >
+        -
+      </div>
       <ContentEditable
         className={`${contentEditableClasses} flex-none italic`}
         // placeholder={placeholder ? placeholder : getPlaceHolder('endMonthYear')}
@@ -49,6 +57,7 @@ function SelectStartEndDate(props: SelectDateProps) {
         isActive={isActive}
         endDate
         isDatePicker
+        value={position ? position.endMonthYear : endDate}
       >
         {position ? position.endMonthYear : endDate}
       </ContentEditable>

@@ -1,12 +1,15 @@
 import { SectionConfig } from '@/types/section.ts'
 import { useResumeStore } from '@/store/rootStore.ts'
-import React, { useCallback } from 'react'
+import React, { useCallback, useContext } from 'react'
 import ContentEditable from '@/helper/contentEditable.tsx'
 import { contentEditableClasses } from '@/constants/constants.ts'
 import { flexGrowFields } from '@/constants/constants.ts'
 import SectionItemArray from '@/components/section/SectionItemArray.tsx'
 import AddNewField from '@/components/util/AddNewField.tsx'
 import SelectStartEndDate from '@/components/util/SelectStartEndDate.tsx'
+import { IoMdAddCircleOutline } from 'react-icons/io'
+import { MdDeleteOutline } from 'react-icons/md'
+import { EditModeContext } from '@/contexts/context.ts'
 
 interface SectionItemProps {
   item: any
@@ -33,6 +36,7 @@ function SectionItem({
     (state) => state[`addNew${sectionKey}Positions`]
   )
   const deleteData = useResumeStore((state) => state[`delete${sectionKey}`])
+  const { isEditMode } = useContext(EditModeContext)
 
   const createChangeHandler = useCallback(
     (field: string) => (value: string) =>
@@ -131,23 +135,45 @@ function SectionItem({
           {item[positionFields.name].map((position: any, index: number) => (
             <div className='mt-2' key={position.id}>
               <div className='flex text-left gap-x-10 justify-between'>
-                <ContentEditable
-                  key={`position-${position.id}`}
-                  className={`${contentEditableClasses}`}
-                  placeholder={
-                    positionFields.arrayFields?.find(
-                      (f) => f.name === 'position'
-                    )?.placeholder || ''
-                  }
-                  onChange={(value) =>
-                    updatePosition(item.id, position.id, {
-                      position: value
-                    })
-                  }
-                  isActive={isActive}
-                >
-                  {position.position}
-                </ContentEditable>
+                <div className='flex flex-start items-center gap-x-1'>
+                  <ContentEditable
+                    key={`position-${position.id}`}
+                    className={`${contentEditableClasses}`}
+                    placeholder={
+                      positionFields.arrayFields?.find(
+                        (f) => f.name === 'position'
+                      )?.placeholder || ''
+                    }
+                    onChange={(value) =>
+                      updatePosition(item.id, position.id, {
+                        position: value
+                      })
+                    }
+                    isActive={isActive}
+                    value={position.position}
+                  >
+                    {position.position}
+                  </ContentEditable>
+                  {isEditMode && (
+                    <div className='hidden group-hover:flex'>
+                      <div
+                        className='cursor-pointer'
+                        onClick={() => handleDeletePosition(position.id)}
+                      >
+                        <MdDeleteOutline size={15} className='text-red-600' />
+                      </div>
+                      <div
+                        className='cursor-pointer'
+                        onClick={() => handleAddNewPosition(index)}
+                      >
+                        <IoMdAddCircleOutline
+                          size={15}
+                          className='text-green-600'
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
                 <SelectStartEndDate
                   onChange={(value: string, dateType = 'beginMonthYear') =>
                     updatePosition(item.id, position.id, {
@@ -177,13 +203,13 @@ function SectionItem({
                 }
                 return null
               })}
-              <AddNewField
-                handleAddNewField={() => handleAddNewPosition(index)}
-                handleDeleteItem={() => handleDeletePosition(position.id)}
-                addArrayField={false}
-                addTooltip='Add Title/Position'
-                deleteTooltip='Delete Position'
-              />
+              {/*<AddNewField*/}
+              {/*  handleAddNewField={() => handleAddNewPosition(index)}*/}
+              {/*  handleDeleteItem={() => handleDeletePosition(position.id)}*/}
+              {/*  addArrayField={false}*/}
+              {/*  addTooltip='Add Title/Position'*/}
+              {/*  deleteTooltip='Delete Position'*/}
+              {/*/>*/}
             </div>
           ))}
         </div>
@@ -205,6 +231,7 @@ function SectionItem({
             onChange={createChangeHandler(fields[0]?.name as string)}
             isActive={isActive}
             defaultValue={fields[0]?.defaultValue as string}
+            value={item[fieldNames[0]]}
           >
             {item[fieldNames[0]]}
           </ContentEditable>
@@ -268,6 +295,7 @@ function SectionItem({
                               ? field?.name
                               : ''
                           }
+                          value={item[field.name]}
                         >
                           {item[field.name]}
                         </ContentEditable>
@@ -309,6 +337,7 @@ function SectionItem({
                     dataField={
                       flexGrowFields.includes(field.name) ? field?.name : ''
                     }
+                    value={item[field.name]}
                   >
                     {item[field.name]}
                   </ContentEditable>

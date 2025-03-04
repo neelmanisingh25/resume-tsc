@@ -26,6 +26,7 @@ export interface Field {
   arrayFields?: Field[]
   displayName?: string
   deleteIcon?: boolean
+  value?: string
 }
 
 export interface SectionConfig {
@@ -44,11 +45,13 @@ export const SECTION_CONFIGS: Record<string, SectionConfig> = {
         placeholder: 'Company Name',
         required: true,
         deleteIcon: true
+        // defaultValue: 'Upland Software'
       },
       {
         name: 'location',
         type: 'text',
         placeholder: 'Location'
+        // defaultValue: 'Bengaluru, India'
       },
       {
         name: 'positions',
@@ -61,16 +64,19 @@ export const SECTION_CONFIGS: Record<string, SectionConfig> = {
             placeholder: 'Title/Position',
             required: true,
             deleteIcon: true
+            // defaultValue: 'Software Engineer II'
           },
           {
             name: 'beginMonthYear',
             type: 'text',
             placeholder: 'Start Date'
+            // defaultValue: 'Sep 2024'
           },
           {
             name: 'endMonthYear',
             type: 'text',
             placeholder: 'Finish Date'
+            // defaultValue: 'Present'
           },
           {
             name: 'achievements',
@@ -127,7 +133,7 @@ export const SECTION_CONFIGS: Record<string, SectionConfig> = {
         name: 'studyProgram',
         type: 'text',
         placeholder: 'Study Program',
-        // defaultValue: 'Study Program',
+        // defaultValue: 'Bachelor of Technology',
         required: true,
         deleteIcon: true
       },
@@ -136,6 +142,7 @@ export const SECTION_CONFIGS: Record<string, SectionConfig> = {
         type: 'date',
         placeholder: 'Graduation Date',
         displayName: 'Graduation Date'
+        // defaultValue: 'Jun 2021'
       },
       // {
       //   name: 'endMonthYear',
@@ -145,7 +152,7 @@ export const SECTION_CONFIGS: Record<string, SectionConfig> = {
       {
         name: 'institution',
         placeholder: 'Institution/Place of Education',
-        // defaultValue: 'Institution/Place of Education',
+        // defaultValue: 'Lovely Professional University',
         required: true,
         type: 'text'
       },
@@ -154,11 +161,13 @@ export const SECTION_CONFIGS: Record<string, SectionConfig> = {
         displayName: 'CGPA/Percentage',
         placeholder: 'CGPA/Percentage, (Optional)',
         type: 'text'
+        // defaultValue: '7.53'
       },
       {
         name: 'location',
         placeholder: 'Location',
         type: 'text'
+        // defaultValue: 'Phagwara, Punjab'
       }
     ],
     rows: [

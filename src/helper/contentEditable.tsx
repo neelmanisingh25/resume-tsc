@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react'
 import { showPlaceholderClasses } from '@/constants/constants.ts'
 import MonthYearPicker from '@/components/util/MonthYearPicker.tsx'
-import { EditModeContext } from '@/contexts/context.ts'
+import { EditModeContext, PreviewModeContext } from '@/contexts/context.ts'
 
 interface Props {
   children: React.ReactNode
@@ -22,6 +22,7 @@ interface Props {
   isDatePicker?: boolean
   endDate?: boolean
   useHtml?: boolean
+  value?: string
 }
 
 function ContentEditable({
@@ -42,11 +43,13 @@ function ContentEditable({
   dataField,
   isDatePicker = false,
   endDate = false,
-  useHtml = false
+  useHtml = false,
+  value
 }: Props) {
   const contentEditableDivRef = useRef<HTMLDivElement>(null)
   const [showDatePicker, setShowDatePicker] = useState(false)
   const { isEditMode } = useContext(EditModeContext)
+  const { isPreviewMode } = useContext(PreviewModeContext)
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== 'Enter' && e.key !== 'Backspace') return
@@ -136,6 +139,7 @@ function ContentEditable({
         ${className || ''}
         ${placeholder ? `${showPlaceholderClasses}` : ''}
         ${isDatePicker ? 'cursor-pointer' : ''}
+        ${isPreviewMode && !value ? 'hidden' : ''}
       `}
         data-placeholder={placeholder}
         onInput={() => handleInput(true)}
@@ -148,7 +152,7 @@ function ContentEditable({
         {/*) : (*/}
         {/*  children*/}
         {/*)}*/}
-        {children}
+        {value ? value : children}
       </div>
       {isDatePicker && showDatePicker && isEditMode && (
         <MonthYearPicker

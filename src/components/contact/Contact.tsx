@@ -3,14 +3,19 @@ import ContactInfo from '../ContactInfo.tsx'
 import { useCallback, useContext, useState } from 'react'
 import AccountInfoEditModal from '../modal/AccountInfoEditModal.tsx'
 import type { Contact } from '@/store/HeaderSlice.ts'
-import { showPlaceholderClasses } from '@/constants/constants.ts'
+import {
+  contentEditableClasses,
+  showPlaceholderClasses
+} from '@/constants/constants.ts'
 import { EditModeContext } from '@/contexts/context.ts'
+import ContentEditable from '@/helper/contentEditable.tsx'
 
 function Contact() {
   const name = useResumeStore((state) => state.name)
   const updateAllContactInfo = useResumeStore(
     (state) => state.updateAllContactInfo
   )
+  const updateName = useResumeStore((state) => state.updateName)
   const [showContactEditModal, setShowContactEditModal] = useState(false)
 
   const handleContactFormSubmit = useCallback(
@@ -32,19 +37,21 @@ function Contact() {
 
   return (
     <>
+      <ContentEditable
+        className={`text-4xl font-bold ${contentEditableClasses} focus:border-b-2`}
+        placeholder='John Doe'
+        onChange={updateName}
+      >
+        {name}
+      </ContentEditable>
       <div
         onClick={() => {
           setShowContactEditModal(true)
         }}
       >
-        <h1
-          className={`text-4xl font-bold ${showPlaceholderClasses}`}
-          data-placeholder='John Doe'
-        >
-          {name}
-        </h1>
         <ContactInfo />
       </div>
+
       <AccountInfoEditModal
         onFormSubmit={handleContactFormSubmit}
         showModal={showContactEditModal && isEditMode}

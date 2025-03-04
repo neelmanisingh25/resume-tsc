@@ -1,7 +1,8 @@
-import { memo, useCallback, useRef } from 'react'
+import { memo, useCallback, useContext, useRef } from 'react'
 import ContentEditable from '@/helper/contentEditable.tsx'
 import { contentEditableClasses } from '@/constants/constants.ts'
 import { useResumeStore } from '@/store/rootStore.ts'
+import { PreviewModeContext } from '@/contexts/context.ts'
 
 interface Props {
   workExperienceId: string
@@ -32,6 +33,7 @@ function SectionItemArray(props: Props) {
   } = props
 
   const updateData = useResumeStore((state) => state[`update${sectionKey}Data`])
+  const { isPreviewMode } = useContext(PreviewModeContext)
   const ulRef = useRef<HTMLUListElement>(null)
 
   const onAchievementChange = useCallback(
@@ -111,7 +113,10 @@ function SectionItemArray(props: Props) {
     <div>
       <ul className={`pl-0 `} ref={ulRef}>
         {value?.map((achievement, index) => (
-          <li key={index} className='text-left list-disc list-outside ml-4'>
+          <li
+            key={index}
+            className={`text-left list-disc list-outside ml-4 ${isPreviewMode && !achievement ? 'hidden' : ''}`}
+          >
             <ContentEditable
               className={`${contentEditableClasses} text-left`}
               placeholder={placeholder}
@@ -122,6 +127,7 @@ function SectionItemArray(props: Props) {
               addNewAchievement={true}
               deleteAchievement={true}
               // useHtml
+              value={achievement}
             >
               {achievement}
             </ContentEditable>

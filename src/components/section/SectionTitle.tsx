@@ -32,6 +32,7 @@ function SectionTitle(props: SectionTitleProps) {
       }
       defaultValue={sectionKey === 'skills' ? 'Skills' : config?.name}
       onChange={sectionKey === 'skills' ? updateSkillTitle : updateTitle}
+      value={title}
     >
       {title}
     </ContentEditable>

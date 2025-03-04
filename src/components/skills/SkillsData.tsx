@@ -5,7 +5,7 @@ import React, { useCallback, useContext, useRef } from 'react'
 import useSkillActions from '@/hooks/useSkillActions.ts'
 import useClickOutside from '@/hooks/useClickOutside.ts'
 import { MdDeleteOutline } from 'react-icons/md'
-import { EditModeContext } from '@/contexts/context.ts'
+import { EditModeContext, PreviewModeContext } from '@/contexts/context.ts'
 
 interface Props {
   skill: Skill
@@ -31,6 +31,8 @@ function SkillsData(props: Props) {
     handleDeleteSkill
   } = useSkillActions()
 
+  const { isPreviewMode } = useContext(PreviewModeContext)
+
   const skillDataRef = useRef<SkillDataRef>({})
   const skillValueRef = useRef<SkillValueRef>({})
 
@@ -53,7 +55,6 @@ function SkillsData(props: Props) {
     []
   )
 
-  // @ts-ignore
   const { isEditMode } = useContext(EditModeContext)
 
   return (
@@ -66,8 +67,14 @@ function SkillsData(props: Props) {
         placeholder='Untitled'
         isActive={isActive}
         onChange={handleSkillGroupChange(skill.id)}
+        value={skill.name}
       >{`${skill.name}`}</ContentEditable>
-      <div className='font-bold'>:</div>
+      {/*<div className='font-bold'>:</div>*/}
+      <div
+        className={`font-bold ${isPreviewMode && (!skill.value || skill.value.length === 0 || skill.value.every((v) => !v.data)) ? 'hidden' : ''}`}
+      >
+        :
+      </div>
       <div className={`flex flex-wrap gap-2 ml-2`}>
         {skill.value.map((v, index) => (
           <div
@@ -85,6 +92,7 @@ function SkillsData(props: Props) {
                 skillValueRef
               )}
               onChange={handleUpdateSkill(skill.id, index)}
+              value={v.data}
             >
               {v.data}
             </ContentEditable>
