@@ -47,7 +47,9 @@ function ContactInfoCard(props: any) {
   const renderItems = () => {
     switch (contactInfo?.type) {
       case 'url':
-        return (
+        return isPreviewMode ? (
+          <div>{extractAfterHttps(contactInfo.value)}</div>
+        ) : (
           <a
             href={contactInfo.value}
             data-placeholder={contactInfo.placeholder}

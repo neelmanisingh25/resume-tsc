@@ -36,7 +36,11 @@ function Contact() {
   return (
     <>
       <ContentEditable
-        className={`text-4xl font-bold ${contentEditableClasses} focus:border-b-2`}
+        className={
+          isEditMode
+            ? `text-4xl font-bold ${contentEditableClasses} focus:border-b-2 flex items-center justify-center`
+            : 'text-4xl font-bold flex items-center justify-center'
+        }
         placeholder='John Doe'
         onChange={updateName}
         value={name}

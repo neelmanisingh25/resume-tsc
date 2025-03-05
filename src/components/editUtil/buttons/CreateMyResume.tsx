@@ -32,7 +32,9 @@ function CreateMyResume() {
   }
 
   const handleDownloadResume = async () => {
-    const htmlContent = document.documentElement.outerHTML
+    // const htmlContent = document.documentElement.outerHTML
+    // @ts-ignore
+    const htmlContent = document.getElementById('root').innerHTML
     const base64Html = btoa(htmlContent)
     try {
       setIsDownloading(true)
