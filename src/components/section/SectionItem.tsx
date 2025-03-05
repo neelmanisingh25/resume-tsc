@@ -62,7 +62,6 @@ function SectionItem({
   const handleAddNewItem = () => {
     const emptyIndex = checkForEmptyState()
     if (emptyIndex === -1) {
-      console.log('addNewItem')
       addNewData(index + 1)
       focusNewItem(index + 1)
     } else {
@@ -133,7 +132,7 @@ function SectionItem({
       return (
         <div key={fieldNames.join('-')}>
           {item[positionFields.name].map((position: any, index: number) => (
-            <div className='mt-2' key={position.id}>
+            <div className='' key={position.id}>
               <div className='flex text-left gap-x-10 justify-between'>
                 <div className='flex flex-start items-center gap-x-1'>
                   <ContentEditable
@@ -279,7 +278,7 @@ function SectionItem({
                       className={`${flexGrowFields.includes(field.name) ? 'font-semibold' : ''}`}
                     >
                       <div className='flex'>
-                        <span className='pr-1'>
+                        <span className='gap-x-2'>
                           {field?.displayName && item[field.name]
                             ? `${field.displayName} : `
                             : ''}

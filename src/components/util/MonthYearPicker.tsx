@@ -1,16 +1,34 @@
-import { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 interface MonthYearPickerProps {
   onChange: (value: string) => void
   onClose: () => void
   endDate?: boolean
+  inputRef?: React.RefObject<HTMLElement | null>
 }
 
 function MonthYearPicker(props: MonthYearPickerProps) {
-  const { onChange, onClose, endDate = false } = props
+  const { onChange, onClose, endDate = false, inputRef } = props
 
+  const pickerRef = useRef<HTMLDivElement | null>(null)
   const currentYear = new Date().getFullYear()
   const [selectedYear, setSelectedYear] = useState(currentYear)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        pickerRef.current &&
+        !pickerRef.current.contains(event.target as Node) &&
+        inputRef &&
+        !inputRef.current?.contains(event.target as Node)
+      ) {
+        onClose()
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [onClose, inputRef])
 
   const months = [
     'Jan',
@@ -42,7 +60,10 @@ function MonthYearPicker(props: MonthYearPickerProps) {
   }
 
   return (
-    <div className='absolute z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 mt-6 right-0'>
+    <div
+      className='absolute z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 mt-6 right-0'
+      ref={pickerRef}
+    >
       <div className='flex justify-between items-center mb-4'>
         <button
           onClick={handlePrevYear}

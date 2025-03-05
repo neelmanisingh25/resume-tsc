@@ -1,9 +1,12 @@
+body{
+  background-color: #1a1a1a;
+}
+
 #root {
   margin: 0 auto;
   /*padding: 2rem;*/
   text-align: center;
   caret-color: transparent;
-  background-color: #1a1a1a;
 }
 
 [contenteditable]:focus-visible {

@@ -81,7 +81,7 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                 <Input
                   type='text'
                   name='github'
-                  placeholder='Enter Github Profile'
+                  placeholder='Enter Github Profile URL'
                   defaultValue={state?.github}
                   className='outline-none'
                 />
@@ -91,21 +91,21 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                 <Input
                   type='text'
                   name='linkedIn'
-                  placeholder='Enter LinkedIn Profile'
+                  placeholder='Enter LinkedIn Profile URL'
                   defaultValue={state?.linkedIn}
                   className='outline-none'
                 />
               </div>
-              {/*<div className='space-y-1'>*/}
-              {/*  <Label htmlFor='portfolio'>Portfolio Website</Label>*/}
-              {/*  <Input*/}
-              {/*    type='text'*/}
-              {/*    name='portfolio'*/}
-              {/*    placeholder='Enter Portfolio URL'*/}
-              {/*    defaultValue={state?.portfolio}*/}
-              {/*    className='outline-none'*/}
-              {/*  />*/}
-              {/*</div>*/}
+              <div className='space-y-1'>
+                <Label htmlFor='portfolio'>Portfolio Website</Label>
+                <Input
+                  type='text'
+                  name='portfolio'
+                  placeholder='Enter Portfolio URL'
+                  defaultValue={state?.portfolio}
+                  className='outline-none'
+                />
+              </div>
             </div>
             <DialogFooter>
               <DialogClose>

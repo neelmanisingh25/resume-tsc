@@ -63,7 +63,7 @@ function SkillsData(props: Props) {
       className={`flex group ${isActive ? 'active' : ''} items-center`}
     >
       <ContentEditable
-        className={`text-left mr-2 ${contentEditableClasses} font-semibold`}
+        className={`text-left mr-2 ${isEditMode && contentEditableClasses} font-semibold`}
         placeholder='Untitled'
         isActive={isActive}
         onChange={handleSkillGroupChange(skill.id)}
@@ -82,7 +82,7 @@ function SkillsData(props: Props) {
             key={v.id}
           >
             <ContentEditable
-              className={`${contentEditableClasses} skill`}
+              className={`${isEditMode && contentEditableClasses} skill`}
               addNewSkill={true}
               isActive={isActive}
               placeholder='Skill'

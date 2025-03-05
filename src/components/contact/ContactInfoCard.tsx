@@ -1,6 +1,9 @@
 import { CiLinkedin, CiLocationOn, CiMail, CiMobile3 } from 'react-icons/ci'
 import { TbWorldWww } from 'react-icons/tb'
 import { SlSocialGithub } from 'react-icons/sl'
+import { showPlaceholderClasses } from '@/constants/constants.ts'
+import { useContext } from 'react'
+import { PreviewModeContext } from '@/contexts/context.ts'
 
 // interface ContactInfoProps {
 //   value: string | undefined
@@ -11,13 +14,14 @@ import { SlSocialGithub } from 'react-icons/sl'
 
 function ContactInfoCard(props: any) {
   const { contactInfo } = props
-  const showContent = !!contactInfo.value
-  if (!showContent) {
-    return ''
-  }
+  const { isPreviewMode } = useContext(PreviewModeContext)
+  // if (!showContent) {
+  //   return ''
+  // }
 
   function extractAfterHttps(url: string) {
     const regex = /^https:\/\/(www\.)?(.+)$/
+    if (!url) return null
     const match = url.match(regex)
 
     return match ? match[2] : null
@@ -44,15 +48,30 @@ function ContactInfoCard(props: any) {
     switch (contactInfo?.type) {
       case 'url':
         return (
-          <a href={contactInfo.value}>{extractAfterHttps(contactInfo.value)}</a>
+          <a
+            href={contactInfo.value}
+            data-placeholder={contactInfo.placeholder}
+            className={`${showPlaceholderClasses}`}
+          >
+            {extractAfterHttps(contactInfo.value)}
+          </a>
         )
       default:
-        return <div>{contactInfo.value}</div>
+        return (
+          <div
+            data-placeholder={contactInfo.placeholder}
+            className={`${showPlaceholderClasses}`}
+          >
+            {contactInfo.value}
+          </div>
+        )
     }
   }
 
   return (
-    <div className='flex justify-center items-center text-center mr-2 last:mr-0'>
+    <div
+      className={`flex justify-center items-center text-center mr-2 last:mr-0 ${isPreviewMode && !contactInfo.value ? 'hidden' : ''}`}
+    >
       {renderIcon()} <div className='ml-1'>{renderItems()}</div>
     </div>
   )

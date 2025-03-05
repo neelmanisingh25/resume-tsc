@@ -9,7 +9,10 @@ function PageContainer({ children }: PageContainerProps) {
     <div className='min-h-screen py-8 px-4' id='root-div'>
       <div className='mx-auto relative'>
         {/* A4 container with proper dimensions and padding */}
-        <div className='w-[210mm] h-[297mm] mx-auto bg-white p-[10mm] shadow-lg'>
+        <div
+          className='w-[210mm] mx-auto p-[10mm] min-h-[297mm] bg-white'
+          id='resume-data'
+        >
           {children}
         </div>
       </div>

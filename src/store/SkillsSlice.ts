@@ -40,22 +40,13 @@ const initialState: SkillsState = {
     data: [
       {
         id: uuid(),
-        name: 'Core Skills',
+        name: '',
         value: [
           {
             id: uuid(),
-            data: 'HTML'
-          },
-          {
-            id: uuid(),
-            data: 'CSS'
+            data: ''
           }
         ]
-      },
-      {
-        id: uuid(),
-        name: '',
-        value: [{ id: uuid(), data: '' }]
       }
     ]
   }

@@ -1,49 +1,54 @@
 import ContactInfoCard from './contact/ContactInfoCard.tsx'
-import { useResumeStore } from '@/store/rootStore.ts'
 import { useMemo } from 'react'
 import { v4 as uuid } from 'uuid'
+import useResumeData from '@/hooks/useResumeData.tsx'
 
 function ContactInfo() {
-  // const { email, github, mobile, linkedIn, location, portfolio } = useResumeStore((state) => state.contact)
-  const contactState = useResumeStore((state) => state.contact)
+  const contactState = useResumeData('contact')
   const contactInfo = useMemo(
     () => [
       {
         id: uuid(),
         name: 'location',
-        value: contactState.location
+        value: contactState.location,
+        placeholder: 'Location'
       },
       {
         id: uuid(),
         name: 'mobile',
-        value: contactState.mobile
+        value: contactState.mobile,
+        placeholder: 'Mobile'
       },
       {
         id: uuid(),
         name: 'email',
-        value: contactState.email
+        value: contactState.email,
+        placeholder: 'Email'
       },
       {
         id: uuid(),
         name: 'github',
         value: contactState.github,
         type: 'url',
-        displayText: 'Github'
+        displayText: 'Github',
+        placeholder: 'Github'
       },
       {
         id: uuid(),
         name: 'linkedin',
         value: contactState.linkedIn,
         type: 'url',
-        displayText: 'LinkedIn'
+        displayText: 'LinkedIn',
+        placeholder: 'LinkedIn'
+      },
+      {
+        id: uuid(),
+        name: 'portfolio',
+        value: contactState.portfolio,
+        type: 'url',
+        displayText: 'Portfolio',
+        placeholder: 'Portfolio'
       }
-      // {
-      //   id: uuid(),
-      //   name: 'portfolio',
-      //   value: contactState.portfolio,
-      //   type: 'url',
-      //   displayText: 'Portfolio'
-      // }
     ],
     [contactState]
   )

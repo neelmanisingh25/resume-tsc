@@ -3,15 +3,13 @@ import ContactInfo from '../ContactInfo.tsx'
 import { useCallback, useContext, useState } from 'react'
 import AccountInfoEditModal from '../modal/AccountInfoEditModal.tsx'
 import type { Contact } from '@/store/HeaderSlice.ts'
-import {
-  contentEditableClasses,
-  showPlaceholderClasses
-} from '@/constants/constants.ts'
+import { contentEditableClasses } from '@/constants/constants.ts'
 import { EditModeContext } from '@/contexts/context.ts'
 import ContentEditable from '@/helper/contentEditable.tsx'
+import useResumeData from '@/hooks/useResumeData.tsx'
 
 function Contact() {
-  const name = useResumeStore((state) => state.name)
+  const name = useResumeData('name')
   const updateAllContactInfo = useResumeStore(
     (state) => state.updateAllContactInfo
   )
@@ -41,6 +39,7 @@ function Contact() {
         className={`text-4xl font-bold ${contentEditableClasses} focus:border-b-2`}
         placeholder='John Doe'
         onChange={updateName}
+        value={name}
       >
         {name}
       </ContentEditable>

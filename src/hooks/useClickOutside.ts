@@ -2,23 +2,23 @@ import { SkillDataRef } from '@/components/skills/SkillsData.tsx'
 import React, { useCallback, useEffect } from 'react'
 
 const useClickOutside = (
-  activeSkillGroup: string | null,
-  setActiveSkillGroup: (id: string | null) => void,
-  skillDataRef: React.RefObject<SkillDataRef>
+  activeGroup: string | null,
+  setActiveGroup: (id: string | null) => void,
+  dataRef: React.RefObject<SkillDataRef>
 ) => {
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
-      if (!activeSkillGroup) return
+      if (!activeGroup) return
 
-      const activeElement = skillDataRef.current?.[activeSkillGroup]
+      const activeElement = dataRef.current?.[activeGroup]
       if (activeElement && !activeElement.contains(event.target as Node)) {
-        setActiveSkillGroup(null)
+        setActiveGroup(null)
         if (document.activeElement instanceof HTMLElement) {
           document.activeElement.blur()
         }
       }
     },
-    [activeSkillGroup, setActiveSkillGroup, skillDataRef]
+    [activeGroup, setActiveGroup, dataRef]
   )
 
   useEffect(() => {

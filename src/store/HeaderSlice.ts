@@ -23,14 +23,14 @@ export const createHeaderSlice: StateCreator<
   [],
   HeaderSlice
 > = (set) => ({
-  name: 'Neelmani Singh',
+  name: '',
   contact: {
-    mobile: '+91-9511110626',
-    email: 'hello@neelmani.in',
-    linkedIn: 'https://www.linkedin.com/in/neelmani-singh98',
-    location: 'Bengaluru, Karnataka',
-    github: 'https://github.com/neelmanisingh25',
-    portfolio: 'https://neelmani.in'
+    mobile: '',
+    email: '',
+    linkedIn: '',
+    location: '',
+    github: '',
+    portfolio: ''
   },
   addContactInfo: (key: keyof Contact, value: string) =>
     set(

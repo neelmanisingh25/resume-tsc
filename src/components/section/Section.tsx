@@ -1,12 +1,6 @@
 import { SectionConfig } from '@/types/section.ts'
 import { useResumeStore } from '@/store/rootStore.ts'
-import {
-  useCallback,
-  useDeferredValue,
-  useEffect,
-  useRef,
-  useState
-} from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import {
   DndContext,
@@ -23,6 +17,7 @@ import {
   arrayMove
 } from '@dnd-kit/sortable'
 import SortableSectionItem from '@/components/section/SortableSectionItem.tsx'
+import useResumeData from '@/hooks/useResumeData.tsx'
 
 interface SectionProps {
   sectionKey: string
@@ -30,8 +25,9 @@ interface SectionProps {
 }
 
 function Section({ sectionKey, config }: SectionProps) {
-  const { data } = useResumeStore((state) => state[sectionKey])
-  const sectionData = useDeferredValue(data)
+  // const { data } = useResumeStore((state) => state[sectionKey])
+  // const sectionData = useDeferredValue(data)
+  const { data: sectionData } = useResumeData(sectionKey)
   // const updateTitle = useResumeStore(
   //   (state) => state[`update${sectionKey}Title`]
   // )
@@ -71,7 +67,6 @@ function Section({ sectionKey, config }: SectionProps) {
 
         const arrayFieldData = currentData[arrayFieldName!]
         if (arrayFieldData && arrayFieldData.length > 1) {
-          console.log('arrayFieldData', arrayFieldData)
           const nonEmptyData = arrayFieldData.filter(
             (a: any) => a.trim() !== ''
           )

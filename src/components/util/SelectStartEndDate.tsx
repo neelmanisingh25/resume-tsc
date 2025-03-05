@@ -71,6 +71,7 @@ function SelectStartEndDate(props: SelectDateProps) {
       onChange={onChange}
       isActive={isActive}
       isDatePicker
+      value={graduationDate}
     >
       {graduationDate}
     </ContentEditable>

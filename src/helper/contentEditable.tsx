@@ -159,6 +159,7 @@ function ContentEditable({
           onChange={handleDateSelect}
           onClose={() => setShowDatePicker(false)}
           endDate={endDate}
+          inputRef={contentEditableDivRef}
         />
       )}
     </>

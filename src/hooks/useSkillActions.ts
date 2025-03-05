@@ -48,9 +48,7 @@ const useSkillActions = () => {
         skillValueRef: React.RefObject<SkillValueRef>
       ) =>
       () => {
-        console.log('handleNewskillclicked')
         const emptySkill = checkForEmptySkill(id)
-        console.log('emptySkill', emptySkill)
         if (!emptySkill) {
           addNewSkillValue(id, index)
           focusSkillElement(id, skillValueRef)
