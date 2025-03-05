@@ -34,8 +34,8 @@ function CreateMyResume() {
   const handleDownloadResume = async () => {
     // const htmlContent = document.documentElement.outerHTML
     // @ts-ignore
-    const htmlContent = document.getElementById('root').innerHTML
-    const base64Html = btoa(htmlContent)
+    const htmlContent = document.getElementById('root')
+    // const base64Html = btoa(htmlContent)
     try {
       setIsDownloading(true)
       const response = await fetch(
@@ -46,10 +46,10 @@ function CreateMyResume() {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            html: base64Html,
+            html: htmlContent,
             name: name,
             email: email,
-            isBase64: true
+            isBase64: false
           })
         }
       )
