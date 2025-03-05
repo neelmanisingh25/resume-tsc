@@ -5,7 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { EditModeContext, PreviewModeContext } from '@/contexts/context.ts'
 import { useNavigate } from 'react-router-dom'
 import { useResumeStore } from '@/store/rootStore.ts'
@@ -18,6 +18,7 @@ function CreateMyResume() {
 
   const { email } = useResumeStore((state) => state.contact)
   const { name } = useResumeStore((state) => state)
+  const [isDownloading, setIsDownloading] = useState(false)
 
   const handleSetIsEditMode = () => {
     setIsEditMode(true)
@@ -34,18 +35,22 @@ function CreateMyResume() {
     const htmlContent = document.documentElement.outerHTML
     const base64Html = btoa(htmlContent)
     try {
-      const response = await fetch('http://localhost:3000/generate-pdf', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          html: base64Html,
-          name: name,
-          email: email,
-          isBase64: true
-        })
-      })
+      setIsDownloading(true)
+      const response = await fetch(
+        'https://negative-bibi-resume-builder-f3b7e503.koyeb.app/generate-pdf',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            html: base64Html,
+            name: name,
+            email: email,
+            isBase64: true
+          })
+        }
+      )
 
       console.log(response)
       if (!response.ok) {
@@ -57,6 +62,8 @@ function CreateMyResume() {
       saveAs(blob, fileName)
     } catch (error) {
       console.error('Error downloading resume:', error)
+    } finally {
+      setIsDownloading(false)
     }
   }
 
@@ -66,7 +73,9 @@ function CreateMyResume() {
         <div className='flex gap-4 justify-center'>
           <Button onClick={handleSetIsEditMode}>Enter Edit Mode</Button>
 
-          <Button onClick={handleDownloadResume}>Download Resume</Button>
+          <Button onClick={handleDownloadResume} disabled={isDownloading}>
+            {isDownloading ? 'Downloading...' : 'Download Resume'}
+          </Button>
         </div>
       ) : isEditMode ? (
         <div className='flex gap-4 justify-center'>
