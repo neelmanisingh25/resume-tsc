@@ -108,7 +108,7 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
               </div>
             </div>
             <DialogFooter>
-              <DialogClose>
+              <DialogClose asChild>
                 <Button type='button' variant='destructive'>
                   Discard
                 </Button>
