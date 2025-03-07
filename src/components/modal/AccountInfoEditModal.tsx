@@ -38,86 +38,88 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
               resume
             </DialogDescription>
           </DialogHeader>
-          <form action={formAction} className='space-y-8'>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-              <div className='space-y-1'>
-                <Label htmlFor='email'>Email</Label>
-                <Input
-                  type='email'
-                  name='email'
-                  placeholder='Enter Email'
-                  defaultValue={state?.email}
-                  className='outline-none'
-                />
+          {formInitialData && (
+            <form action={formAction} className='space-y-8'>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                <div className='space-y-1'>
+                  <Label htmlFor='email'>Email</Label>
+                  <Input
+                    type='email'
+                    name='email'
+                    placeholder='Enter Email'
+                    defaultValue={state?.email}
+                    className='outline-none'
+                  />
+                </div>
+                <div className='space-y-1'>
+                  <Label htmlFor='mobile'>Mobile</Label>
+                  <Input
+                    type='text'
+                    name='mobile'
+                    placeholder='Enter Mobile'
+                    defaultValue={state?.mobile}
+                    className='outline-none'
+                  />
+                  <Label
+                    htmlFor='mobile'
+                    className='text-zinc-400 italic text-xs'
+                  >
+                    Prefix Country Code(+91-9988776655)
+                  </Label>
+                </div>
+                <div className='space-y-1'>
+                  <Label htmlFor='location'>Location</Label>
+                  <Input
+                    type='text'
+                    name='location'
+                    placeholder='Enter Location'
+                    defaultValue={state?.location}
+                    className='outline-none'
+                  />
+                </div>
+                <div className='space-y-1'>
+                  <Label htmlFor='github'>Github</Label>
+                  <Input
+                    type='text'
+                    name='github'
+                    placeholder='Enter Github Profile URL'
+                    defaultValue={state?.github}
+                    className='outline-none'
+                  />
+                </div>
+                <div className='space-y-1'>
+                  <Label htmlFor='linkedIn'>LinkedIn</Label>
+                  <Input
+                    type='text'
+                    name='linkedIn'
+                    placeholder='Enter LinkedIn Profile URL'
+                    defaultValue={state?.linkedIn}
+                    className='outline-none'
+                  />
+                </div>
+                <div className='space-y-1'>
+                  <Label htmlFor='portfolio'>Portfolio Website</Label>
+                  <Input
+                    type='text'
+                    name='portfolio'
+                    placeholder='Enter Portfolio URL'
+                    defaultValue={state?.portfolio}
+                    className='outline-none'
+                  />
+                </div>
               </div>
-              <div className='space-y-1'>
-                <Label htmlFor='mobile'>Mobile</Label>
-                <Input
-                  type='text'
-                  name='mobile'
-                  placeholder='Enter Mobile'
-                  defaultValue={state?.mobile}
-                  className='outline-none'
-                />
-                <Label
-                  htmlFor='mobile'
-                  className='text-zinc-400 italic text-xs'
-                >
-                  Prefix Country Code(+91-9988776655)
-                </Label>
-              </div>
-              <div className='space-y-1'>
-                <Label htmlFor='location'>Location</Label>
-                <Input
-                  type='text'
-                  name='location'
-                  placeholder='Enter Location'
-                  defaultValue={state?.location}
-                  className='outline-none'
-                />
-              </div>
-              <div className='space-y-1'>
-                <Label htmlFor='github'>Github</Label>
-                <Input
-                  type='text'
-                  name='github'
-                  placeholder='Enter Github Profile URL'
-                  defaultValue={state?.github}
-                  className='outline-none'
-                />
-              </div>
-              <div className='space-y-1'>
-                <Label htmlFor='linkedIn'>LinkedIn</Label>
-                <Input
-                  type='text'
-                  name='linkedIn'
-                  placeholder='Enter LinkedIn Profile URL'
-                  defaultValue={state?.linkedIn}
-                  className='outline-none'
-                />
-              </div>
-              <div className='space-y-1'>
-                <Label htmlFor='portfolio'>Portfolio Website</Label>
-                <Input
-                  type='text'
-                  name='portfolio'
-                  placeholder='Enter Portfolio URL'
-                  defaultValue={state?.portfolio}
-                  className='outline-none'
-                />
-              </div>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type='button' variant='destructive'>
-                  Discard
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type='button' variant='destructive'>
+                    Discard
+                  </Button>
+                </DialogClose>
+                <Button type='submit' variant='default'>
+                  Save Changes
                 </Button>
-              </DialogClose>
-              <Button type='submit' variant='default'>
-                Save Changes
-              </Button>
-            </DialogFooter>
-          </form>
+              </DialogFooter>
+            </form>
+          )}
         </DialogContent>
       </Dialog>
     </>
