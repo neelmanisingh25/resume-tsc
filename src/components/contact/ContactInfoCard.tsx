@@ -24,7 +24,7 @@ function ContactInfoCard(props: any) {
     if (!url) return null
     const match = url.match(regex)
 
-    return match ? match[2] : null
+    return match ? match[2] : url
   }
 
   const renderIcon = () => {

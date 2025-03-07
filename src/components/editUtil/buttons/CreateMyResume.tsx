@@ -6,10 +6,15 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { useContext, useState } from 'react'
-import { EditModeContext, PreviewModeContext } from '@/contexts/context.ts'
+import {
+  EditModeContext,
+  PageTypeContext,
+  PreviewModeContext
+} from '@/contexts/context.ts'
 import { useNavigate } from 'react-router-dom'
 import { useResumeStore } from '@/store/rootStore.ts'
 import { saveAs } from 'file-saver'
+import ExtractPdf from '@/helper/extractPdf.tsx'
 
 function CreateMyResume() {
   const { isEditMode, setIsEditMode } = useContext(EditModeContext)
@@ -19,6 +24,7 @@ function CreateMyResume() {
   const { email } = useResumeStore((state) => state.contact)
   const { name } = useResumeStore((state) => state)
   const [isDownloading, setIsDownloading] = useState(false)
+  const { pageType } = useContext(PageTypeContext)
 
   const handleSetIsEditMode = () => {
     setIsEditMode(true)
@@ -54,7 +60,6 @@ function CreateMyResume() {
         }
       )
 
-      console.log(response)
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)
       }
@@ -70,7 +75,8 @@ function CreateMyResume() {
   }
 
   return (
-    <div className='p-3 bg-green-600 resume-options w-[210mm] mx-auto sticky top-0 z-10'>
+    <div className='p-2 bg-gray-400 resume-options mx-auto w-[210mm] sticky bottom-0 z-10 flex justify-center items-center'>
+      {pageType === 'editor' ? <ExtractPdf /> : null}
       {isPreviewMode ? (
         <div className='flex gap-4 justify-center'>
           <Button onClick={handleSetIsEditMode}>Enter Edit Mode</Button>
@@ -97,7 +103,9 @@ function CreateMyResume() {
           </TooltipProvider>
         </div>
       ) : (
-        <Button onClick={handleSetIsEditMode}>Create My Resume</Button>
+        <Button onClick={handleSetIsEditMode}>
+          Create Resume using this Template
+        </Button>
       )}
     </div>
   )

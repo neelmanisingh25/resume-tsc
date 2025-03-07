@@ -16,11 +16,11 @@ function App() {
         <PageTypeProvider>
           <EditModeProvider>
             <PreviewModeProvider>
-              <CreateMyResume />
               <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/editor' element={<EditorPage />} />
               </Routes>
+              <CreateMyResume />
             </PreviewModeProvider>
           </EditModeProvider>
         </PageTypeProvider>

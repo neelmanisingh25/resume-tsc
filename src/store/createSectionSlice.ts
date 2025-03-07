@@ -74,6 +74,7 @@ export const createSectionSlice = (
     }
   }
 
+  // @ts-ignore
   return (set) => ({
     ...initialState,
     [`update${sectionKey}Title`]: (title: string) =>
