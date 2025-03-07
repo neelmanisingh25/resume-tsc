@@ -26,7 +26,6 @@ interface AccountInfoEditModalProps {
 function AccountInfoEditModal(props: AccountInfoEditModalProps) {
   const { onFormSubmit, showModal, setShowModal } = props
   const formInitialData = useResumeStore((state) => state.contact)
-  console.log(formInitialData)
   const [state, formAction] = useActionState(onFormSubmit, formInitialData)
   return (
     <>
@@ -48,7 +47,7 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                     type='email'
                     name='email'
                     placeholder='Enter Email'
-                    defaultValue={state?.email}
+                    defaultValue={formInitialData?.email || state?.email}
                     className='outline-none'
                   />
                 </div>
@@ -58,7 +57,7 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                     type='text'
                     name='mobile'
                     placeholder='Enter Mobile'
-                    defaultValue={state?.mobile}
+                    defaultValue={formInitialData?.mobile || state?.mobile}
                     className='outline-none'
                   />
                   <Label
@@ -74,7 +73,7 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                     type='text'
                     name='location'
                     placeholder='Enter Location'
-                    defaultValue={state?.location}
+                    defaultValue={formInitialData?.location || state?.location}
                     className='outline-none'
                   />
                 </div>
@@ -84,7 +83,7 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                     type='text'
                     name='github'
                     placeholder='Enter Github Profile URL'
-                    defaultValue={state?.github}
+                    defaultValue={formInitialData?.github || state?.github}
                     className='outline-none'
                   />
                 </div>
@@ -94,7 +93,7 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                     type='text'
                     name='linkedIn'
                     placeholder='Enter LinkedIn Profile URL'
-                    defaultValue={state?.linkedIn}
+                    defaultValue={formInitialData?.linkedIn || state?.linkedIn}
                     className='outline-none'
                   />
                 </div>
@@ -104,7 +103,9 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                     type='text'
                     name='portfolio'
                     placeholder='Enter Portfolio URL'
-                    defaultValue={state?.portfolio}
+                    defaultValue={
+                      formInitialData?.portfolio || state?.portfolio
+                    }
                     className='outline-none'
                   />
                 </div>
