@@ -26,6 +26,7 @@ interface AccountInfoEditModalProps {
 function AccountInfoEditModal(props: AccountInfoEditModalProps) {
   const { onFormSubmit, showModal, setShowModal } = props
   const formInitialData = useResumeStore((state) => state.contact)
+  console.log(formInitialData)
   const [state, formAction] = useActionState(onFormSubmit, formInitialData)
   return (
     <>
