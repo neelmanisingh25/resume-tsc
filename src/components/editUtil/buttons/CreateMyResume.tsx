@@ -40,23 +40,26 @@ function CreateMyResume() {
   const handleDownloadResume = async () => {
     // const htmlContent = document.documentElement.outerHTML
     // @ts-ignore
-    const htmlContent = document.getElementById('resume-data').outerHTML
+    const htmlContent = document.getElementById('resume-data').innerHTML
     console.log(htmlContent)
     const base64Html = btoa(htmlContent)
     try {
       setIsDownloading(true)
-      const response = await fetch('http://localhost:3000/generate-pdf', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          html: base64Html,
-          name: name,
-          email: email,
-          isBase64: true
-        })
-      })
+      const response = await fetch(
+        'https://negative-bibi-resume-builder-f3b7e503.koyeb.app/generate-pdf',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            html: base64Html,
+            name: name,
+            email: email,
+            isBase64: true
+          })
+        }
+      )
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)
