@@ -3,7 +3,7 @@ import { TbWorldWww } from 'react-icons/tb'
 import { SlSocialGithub } from 'react-icons/sl'
 import { showPlaceholderClasses } from '@/constants/constants.ts'
 import { useContext } from 'react'
-import { PreviewModeContext } from '@/contexts/context.ts'
+import { EditModeContext, PreviewModeContext } from '@/contexts/context.ts'
 
 // interface ContactInfoProps {
 //   value: string | undefined
@@ -15,6 +15,7 @@ import { PreviewModeContext } from '@/contexts/context.ts'
 function ContactInfoCard(props: any) {
   const { contactInfo } = props
   const { isPreviewMode } = useContext(PreviewModeContext)
+  const { isEditMode } = useContext(EditModeContext)
   // if (!showContent) {
   //   return ''
   // }
@@ -47,7 +48,7 @@ function ContactInfoCard(props: any) {
   const renderItems = () => {
     switch (contactInfo?.type) {
       case 'url':
-        return isPreviewMode ? (
+        return isEditMode ? (
           <div>{extractAfterHttps(contactInfo.value)}</div>
         ) : (
           <a
