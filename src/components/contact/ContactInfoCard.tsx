@@ -49,7 +49,12 @@ function ContactInfoCard(props: any) {
     switch (contactInfo?.type) {
       case 'url':
         return isEditMode ? (
-          <div>{extractAfterHttps(contactInfo.value)}</div>
+          <div
+            data-placeholder={contactInfo.placeholder}
+            className={`${showPlaceholderClasses}`}
+          >
+            {extractAfterHttps(contactInfo.value)}
+          </div>
         ) : (
           <a
             href={contactInfo.value}

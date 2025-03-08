@@ -8,6 +8,7 @@ import { createSkillsSlice, SkillsSlice } from '@/store/SkillsSlice.ts'
 import { createSectionSlice } from '@/store/createSectionSlice.ts'
 import { Section, SECTION_CONFIGS } from '@/types/section.ts'
 import createResumeSectionSlice from '@/store/ResumeSectionSlice.ts'
+import _ from 'lodash'
 
 export interface StoreState
   extends HeaderSlice,
@@ -44,10 +45,7 @@ export const useResumeStore = create<StoreState>()(
         ...createResumeSectionSlice(...arg),
         resetState: (data: any) =>
           arg[0]((state) => {
-            return {
-              ...state,
-              ...data
-            }
+            return _.merge(state, data)
           })
       })),
       {
