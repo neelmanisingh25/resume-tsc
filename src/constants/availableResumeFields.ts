@@ -6,11 +6,11 @@ export const availableResumeFields = [
     config: SECTION_CONFIGS.workExperience
   },
   {
-    sectionKey: 'projects',
-    config: SECTION_CONFIGS.projects
+    sectionKey: 'skills'
   },
   {
-    sectionKey: 'skills'
+    sectionKey: 'projects',
+    config: SECTION_CONFIGS.projects
   },
   {
     sectionKey: 'education',
