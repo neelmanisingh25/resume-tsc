@@ -23,35 +23,24 @@ export const defaultResumeData = {
             position: 'Software Engineer II',
             beginMonthYear: 'Sep 2024',
             endMonthYear: 'Present',
-            achievements: ['achivements1', 'achivements2', 'achivements3']
+            achievements: [
+              'Architected and delivered an enterprise-level UI Component Library hosted on JFrog Artifactory, standardizing designpatterns across teams and accelerating development velocity by 40%',
+              'Spearheaded Frontend Architecture Migration: Led the strategic migration of the customer dashboard from AngularJSto React, resulting in improved performance, maintainability, and a more intuitive user experience, directly contributingto a 10% customer retention rate.',
+              'Orchestrated code reviews and established frontend development best practices, elevating code quality and teamperformance',
+              'Optimized Messaging Dashboard Performance: Implemented critical performance enhancements to the messagingdashboard, reducing campaign load time by 80%, significantly improving user experience and operational efficiency.'
+            ]
           },
           {
             id: uuid(),
             position: 'Software Engineer I',
             beginMonthYear: 'July 2022',
             endMonthYear: 'Aug 2024',
-            achievements: ['achivements1', 'achivements2', 'achivements3']
-          }
-        ]
-      },
-      {
-        id: uuid(),
-        companyName: 'Upland Software',
-        location: 'Bengaluru, India',
-        positions: [
-          {
-            id: uuid(),
-            position: 'Software Engineer II',
-            beginMonthYear: 'Sep 2024',
-            endMonthYear: 'Present',
-            achievements: ['achivements1', 'achivements2', 'achivements3']
-          },
-          {
-            id: uuid(),
-            position: 'Software Engineer I',
-            beginMonthYear: 'July 2022',
-            endMonthYear: 'Aug 2024',
-            achievements: ['achivements1', 'achivements2', 'achivements3']
+            achievements: [
+              'Optimized front-end performance by restructuring component architecture, reducing load times by 35%',
+              "Web SDK Enhancement: Completely revamped the company's Web SDK, implementing robust error handling,improving stability by 30%, and adding new features for enhanced data collection and user tracking capabilities.",
+              'Development Environment Optimization: Created and deployed a new Docker image enabling cross-platformcompatibility with Apple Silicon Macs, reducing development setup time by 50% and improving team productivity.',
+              'Migration Planning: Developed detailed documentation outlining the architecture and approach for the AngularJS toReact migration, creating a solid foundation that later proved critical for successful implementation and customerretention.'
+            ]
           }
         ]
       },
@@ -64,11 +53,10 @@ export const defaultResumeData = {
             id: uuid(),
             position: 'Software Engineer',
             beginMonthYear: 'July 2022',
-            endMonthYear: 'Aug 2024',
+            endMonthYear: 'Mar 2022',
             achievements: [
-              'Analysed Traffic Analyser Platform built with React and Node in an end to end basis.',
-              'Developed new features and solved bugs for Admin Zone platform to onboard new enterprise and add Sender ID for customer communications',
-              'Developed a new feature to download the report in chunks to reduce the time taken to download the report by 90%'
+              'Engineered critical features for Admin Zone platform, streamlining enterprise onboarding and Sender ID managementfor customer communications',
+              'Developed innovative chunking solution for report downloads, slashing download times by 90%'
             ]
           }
         ]
@@ -83,25 +71,9 @@ export const defaultResumeData = {
             position: 'Programmer Analyst Trainee',
             beginMonthYear: 'Jul 2021',
             endMonthYear: 'Mar 2022',
-            achievements: []
-          }
-        ]
-      },
-      {
-        id: uuid(),
-        companyName: 'Eclerx',
-        location: 'Mumbai, Maharashtra',
-        positions: [
-          {
-            id: uuid(),
-            position: 'Intern',
-            beginMonthYear: 'Sep 2020',
-            endMonthYear: 'Jul 2021',
             achievements: [
-              'Accomplished growth in client profit by 30% in quarter 2 of 2021',
-              'Presented with Client(Director) appreciation twice in a month',
-              'Received Best Quality Work Performer award recognition',
-              'Mentored and trained 2 new joiners'
+              'Drove 30% client profit growth in Q2 2021 through optimization of key business processes',
+              'Received Best Quality Work Performer award for outstanding contributions to project success'
             ]
           }
         ]
@@ -113,11 +85,10 @@ export const defaultResumeData = {
     data: [
       {
         id: uuid(),
-        projectName: 'Resume Maker',
+        projectName: 'Resume Builder',
         description: [
-          'Resume Maker is a web application that allows users to create and customize their resumes' +
-            ' with ease. It provides a user-friendly interface and a wide range of customizable templates to choose' +
-            ' from. Users can easily add their personal information, work experience, education, skills, and more to create a professional and visually appealing resume.'
+          'Designed and developed a web application enabling users to create customized, professional resumes',
+          'Engineered responsive design for optimal viewing across all device types'
         ],
         url: 'https://resume.neelmani.in',
         beginMonthYear: 'Feb 2025',
@@ -181,9 +152,8 @@ export const defaultResumeData = {
             beginMonthYear: 'Mar 2019',
             endMonthYear: 'Sep 2020',
             responsibility: [
-              'Promoted organisation from Tier 1 to Tier 2 with 25+ successful events and programmes',
-              'Led a team of 70+ members',
-              'Encouraged team with skill-development programmes'
+              'Elevated organization from Tier 1 to Tier 2 status by executing 25+ successful events and programs',
+              'Led cross-functional team of 70+ members, developing leadership and organizational management skills'
             ]
           }
         ]
