@@ -116,7 +116,15 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                     Discard
                   </Button>
                 </DialogClose>
-                <Button type='submit' variant='default'>
+                <Button
+                  type='submit'
+                  variant='default'
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const formData = new FormData(e.target.closest('form'))
+                    formAction(formData)
+                  }}
+                >
                   Save Changes
                 </Button>
               </DialogFooter>

@@ -15,11 +15,13 @@ import { useNavigate } from 'react-router-dom'
 import { useResumeStore } from '@/store/rootStore.ts'
 import { saveAs } from 'file-saver'
 import ExtractPdf from '@/helper/extractPdf.tsx'
+import { defaultResumeData } from '@/constants/defaultResume.ts'
 
 function CreateMyResume() {
   const { isEditMode, setIsEditMode } = useContext(EditModeContext)
   const { isPreviewMode, setIsPreviewMode } = useContext(PreviewModeContext)
   const navigate = useNavigate()
+  const resetStore = useResumeStore((state) => state.resetState)
 
   const { email } = useResumeStore((state) => state.contact)
   const { name } = useResumeStore((state) => state)
@@ -29,6 +31,12 @@ function CreateMyResume() {
   const handleSetIsEditMode = () => {
     setIsEditMode(true)
     setIsPreviewMode(false)
+  }
+
+  const handleSetIsEditModeWithSameData = () => {
+    setIsEditMode(true)
+    setIsPreviewMode(false)
+    resetStore(defaultResumeData)
     navigate('/editor')
   }
 
@@ -41,7 +49,6 @@ function CreateMyResume() {
     // const htmlContent = document.documentElement.outerHTML
     // @ts-ignore
     const htmlContent = document.getElementById('resume-data').innerHTML
-    console.log(htmlContent)
     const base64Html = btoa(htmlContent)
     try {
       setIsDownloading(true)
@@ -104,9 +111,14 @@ function CreateMyResume() {
           </TooltipProvider>
         </div>
       ) : (
-        <Button onClick={handleSetIsEditMode}>
-          Create Resume using this Template
-        </Button>
+        <div>
+          <Button onClick={handleSetIsEditMode}>
+            Create Resume(Empty Template)
+          </Button>
+          <Button onClick={handleSetIsEditModeWithSameData}>
+            Create Resume(Fill same data)
+          </Button>
+        </div>
       )}
     </div>
   )
