@@ -25,7 +25,7 @@ export const defaultResumeData = {
             endMonthYear: 'Present',
             achievements: [
               'Architected and delivered an enterprise-level UI Component Library hosted on JFrog Artifactory, standardizing designpatterns across teams and accelerating development velocity by 40%',
-              'Spearheaded Frontend Architecture Migration: Led the strategic migration of the customer dashboard from AngularJSto React, resulting in improved performance, maintainability, and a more intuitive user experience, directly contributingto a 10% customer retention rate.',
+              'Spearheaded Frontend Architecture Migration: Led the strategic migration of the customer dashboard from AngularJS to React, resulting in improved performance, maintainability, and a more intuitive user experience, directly contributingto a 10% customer retention rate.',
               'Orchestrated code reviews and established frontend development best practices, elevating code quality and teamperformance',
               'Optimized Messaging Dashboard Performance: Implemented critical performance enhancements to the messagingdashboard, reducing campaign load time by 80%, significantly improving user experience and operational efficiency.'
             ]
@@ -88,7 +88,8 @@ export const defaultResumeData = {
         projectName: 'Resume Builder',
         description: [
           'Designed and developed a web application enabling users to create customized, professional resumes',
-          'Engineered responsive design for optimal viewing across all device types'
+          'Engineered responsive design for optimal viewing across all device types',
+          'Technologies used: React, Zustand, Node, Express, Docker, Vite, Tailwind CSS, TypeScript'
         ],
         url: 'https://resume.neelmani.in',
         beginMonthYear: 'Feb 2025',
@@ -133,6 +134,16 @@ export const defaultResumeData = {
             data: [
               'MongoDB, MySQL, Spring, Spring Boot, JDBC, Sprint Data JPA, Hibernate'
             ]
+          }
+        ]
+      },
+      {
+        id: uuid(),
+        name: 'Current Learning',
+        value: [
+          {
+            id: uuid(),
+            data: ['Docker, Kubernetes, Go, Ruby']
           }
         ]
       }

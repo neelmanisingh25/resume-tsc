@@ -121,7 +121,8 @@ function AccountInfoEditModal(props: AccountInfoEditModalProps) {
                   variant='default'
                   onClick={(e) => {
                     e.preventDefault()
-                    const formData = new FormData(e.target.closest('form'))
+                    // @ts-ignore
+                    const formData = new FormData(e.target?.closest('form'))
                     formAction(formData)
                   }}
                 >
