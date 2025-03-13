@@ -49,6 +49,7 @@ function CreateMyResume() {
     // const htmlContent = document.documentElement.outerHTML
     // @ts-ignore
     const htmlContent = document.getElementById('resume-data').innerHTML
+
     const base64Html = btoa(htmlContent)
     try {
       setIsDownloading(true)

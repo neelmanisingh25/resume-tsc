@@ -19,6 +19,13 @@
 /*  -moz-osx-font-smoothing: grayscale;*/
 /*}*/
 
+:root {
+  font-family: "Roboto", monospace;
+  font-optical-sizing: auto;
+  /*font-weight: 400;*/
+  font-style: normal;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

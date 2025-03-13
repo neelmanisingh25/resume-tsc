@@ -33,7 +33,7 @@ export const defaultResumeData = {
           {
             id: uuid(),
             position: 'Software Engineer I',
-            beginMonthYear: 'July 2022',
+            beginMonthYear: 'Jul 2022',
             endMonthYear: 'Aug 2024',
             achievements: [
               'Optimized front-end performance by restructuring component architecture, reducing load times by 35%',
@@ -52,8 +52,8 @@ export const defaultResumeData = {
           {
             id: uuid(),
             position: 'Software Engineer',
-            beginMonthYear: 'July 2022',
-            endMonthYear: 'Mar 2022',
+            beginMonthYear: 'Mar 2022',
+            endMonthYear: 'Jul 2022',
             achievements: [
               'Engineered critical features for Admin Zone platform, streamlining enterprise onboarding and Sender ID managementfor customer communications',
               'Developed innovative chunking solution for report downloads, slashing download times by 90%'
