@@ -31,6 +31,7 @@ function CreateMyResume() {
   const handleSetIsEditMode = () => {
     setIsEditMode(true)
     setIsPreviewMode(false)
+    navigate('/editor')
   }
 
   const handleSetIsEditModeWithSameData = () => {
@@ -53,21 +54,18 @@ function CreateMyResume() {
     const base64Html = btoa(htmlContent)
     try {
       setIsDownloading(true)
-      const response = await fetch(
-        'https://negative-bibi-resume-builder-f3b7e503.koyeb.app/generate-pdf',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            html: base64Html,
-            name: name,
-            email: email,
-            isBase64: true
-          })
-        }
-      )
+      const response = await fetch('http://localhost:3000/generate-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          html: base64Html,
+          name: name,
+          email: email,
+          isBase64: true
+        })
+      })
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)
@@ -113,12 +111,10 @@ function CreateMyResume() {
         </div>
       ) : (
         <div>
-          <Button onClick={handleSetIsEditMode}>
-            Create Resume(Empty Template)
-          </Button>
-          <Button onClick={handleSetIsEditModeWithSameData}>
-            Create Resume(Fill same data)
-          </Button>
+          <Button onClick={handleSetIsEditMode}>Create Resume</Button>
+          {/*<Button onClick={handleSetIsEditModeWithSameData}>*/}
+          {/*  Create Resume(Fill same data)*/}
+          {/*</Button>*/}
         </div>
       )}
     </div>
