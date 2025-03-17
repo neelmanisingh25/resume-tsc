@@ -34,12 +34,12 @@ function CreateMyResume() {
     navigate('/editor')
   }
 
-  const handleSetIsEditModeWithSameData = () => {
-    setIsEditMode(true)
-    setIsPreviewMode(false)
-    resetStore(defaultResumeData)
-    navigate('/editor')
-  }
+  // const handleSetIsEditModeWithSameData = () => {
+  //   setIsEditMode(true)
+  //   setIsPreviewMode(false)
+  //   resetStore(defaultResumeData)
+  //   navigate('/editor')
+  // }
 
   const handleSetIsPreviewMode = () => {
     setIsPreviewMode(true)
