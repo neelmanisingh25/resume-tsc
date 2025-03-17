@@ -15,13 +15,13 @@ import { useNavigate } from 'react-router-dom'
 import { useResumeStore } from '@/store/rootStore.ts'
 import { saveAs } from 'file-saver'
 import ExtractPdf from '@/helper/extractPdf.tsx'
-import { defaultResumeData } from '@/constants/defaultResume.ts'
+// import { defaultResumeData } from '@/constants/defaultResume.ts'
 
 function CreateMyResume() {
   const { isEditMode, setIsEditMode } = useContext(EditModeContext)
   const { isPreviewMode, setIsPreviewMode } = useContext(PreviewModeContext)
   const navigate = useNavigate()
-  const resetStore = useResumeStore((state) => state.resetState)
+  // const resetStore = useResumeStore((state) => state.resetState)
 
   const { email } = useResumeStore((state) => state.contact)
   const { name } = useResumeStore((state) => state)
