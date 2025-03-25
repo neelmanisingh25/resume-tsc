@@ -50,8 +50,16 @@ function CreateMyResume() {
     // const htmlContent = document.documentElement.outerHTML
     // @ts-ignore
     const htmlContent = document.getElementById('resume-data').innerHTML
+    let base64Html;
+    let isBase64 = true
 
-    const base64Html = btoa(htmlContent)
+    try{
+      base64Html = btoa(htmlContent)
+    } catch (error) {
+      console.warn('Base 64 encoding failed, using raw html', error)
+      base64Html = htmlContent
+      isBase64 = false
+    }
     try {
       setIsDownloading(true)
       const response = await fetch(
@@ -65,7 +73,7 @@ function CreateMyResume() {
             html: base64Html,
             name: name,
             email: email,
-            isBase64: true
+            isBase64: isBase64
           })
         }
       )
