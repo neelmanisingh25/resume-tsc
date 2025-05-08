@@ -1,50 +1,58 @@
-# React + TypeScript + Vite
+# 🧾 Resume Builder - TypeScript + React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, customizable, developer-first resume builder powered by **React**, **TypeScript**, and **Vite**. Perfect for engineers who want full control over resume layout and content — all locally, with no external dependencies.
 
-Currently, two official plugins are available:
+![Resume Screenshot](./public/screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- ⚛️ Built with React + TypeScript
+- ⚡ Superfast dev server via Vite
+- ✍️ Structured, editable data in JSON/TS
+- 💾 Easily downloadable in PDF
+- 🎨 Custom styling via CSS or Tailwind
+- 🧩 Clean, modular, and extensible structure
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🌐 Live Demo
+
+👉 [https://resume.neelmani.in](https://resume.neelmani.in)
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/neelmanisingh25/resume-tsc.git
+cd resume-tsc
+pnpm install
+pnpm run dev
 ```
+## ✏️ Customization Guide
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+The default data lives in src/constants/defaultResume.ts, change the resume data there with yours for a static site
+Styling has been done with Tailwind CSS, feel free to play around it and give birth to a new template.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🧪 Roadmap Ideas
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Multiple resume templates
+- JSON resume import/export
+- Offline mode with PWA support
+- AI support increased to re-writing resume and ATS score
+- Cover letter generation based on Resume
+
+## 🤝 Contributing
+
+Want to make it better? Feel free to fork, raise issues, or submit a PR 🙌
+Open to ideas, templates, or even complete redesigns.
+
+## 📄 License
+
+MIT License © Neelmani Singh
+
+## 💼 Connect with Me
+
+LinkedIn: https://linkedin.com/in/neelmani-singh98
