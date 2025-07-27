@@ -63,7 +63,7 @@ function CreateMyResume() {
     try {
       setIsDownloading(true)
       const response = await fetch(
-        'https://negative-bibi-resume-builder-f3b7e503.koyeb.app/generate-pdf',
+        'https://pdf-generator-4g6e.onrender.com/generate-pdf',
         {
           method: 'POST',
           headers: {
